@@ -1,0 +1,9 @@
+# Ignore virtual env folder
+env/*
+
+# Ignore sensitive data
+credentials/*
+
+.idea
+
+celery_tasks/config/config.py

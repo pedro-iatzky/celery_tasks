@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379"
+
+  celery:
+    build: .
+    command: bash ./start_service.sh
+    ports:
+      - "t:8080"
+    depends_on:
+      - redis
