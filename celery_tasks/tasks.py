@@ -5,26 +5,18 @@
 import datetime
 import logging
 
-import requests
-
 from celery_tasks.celery import celery_app
-from celery_tasks.util import PORT
+from celery_tasks.common.helpers import execute_with_exception_logging
+from celery_tasks.common.util import PORT
 
 LOGGER_URL = f"http://localhost:{PORT}/logger"
 
 
 @celery_app.task
+@execute_with_exception_logging
 def naive_test():
-    try:
-        logging.error("Testing if I can watch the error")
-        raise ValueError
-    except ValueError as e:
-        json_msg = {
-            "type": "ERROR",
-            "message": f"exception when executing the task {str(e)}"
-        }
-        requests.post(LOGGER_URL, json=json_msg)
-    return "Hello world!"
+    logging.error("Testing if I can watch the error")
+    raise ValueError
 
 
 @celery_app.task

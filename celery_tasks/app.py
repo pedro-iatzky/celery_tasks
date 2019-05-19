@@ -7,7 +7,7 @@ import logging
 from flask import Flask, request, jsonify
 
 from celery_tasks.tasks import naive_test, write_to_file
-from celery_tasks.util import PORT
+from celery_tasks.common.util import PORT
 
 app = Flask(__name__)
 
